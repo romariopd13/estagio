@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="graficos">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Listagem todos</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="lib/angular-1.7.0/angular.js"></script>
+    <script src="lib/angular-google-chart-development/ng-google-chart.js"></script>
+    <script src="lib/angular-google-chart-development/ng-google-chart.min.js"></script>
+
+    <script src="angularjs.js"></script>
+    <style>
+        .success{
+            background-color: green;
+        }
+        .danger{
+            background-color: red;
+        }
+    </style>
+</head>
+<body ng-controller="graficosCtrl">
+    <div ng-include="'menu.html'"></div>
+    <div class="container">
+        <div class="jumbotron">
+            <h3>Listagem Todos</h3>
+        </div>
+        <form action="" class="form-horizontal">
+            <div class="form-group">
+                <label for="" class="col-md-1 control-label">Filtro:</label>
+            <div class="col-md-3">
+                <input type="text" class="form-control" ng-model="busca" placeholder="Nome"/>
+            </div>
+                <label for="" class="col-md-1 control-label">Versão:</label>
+            <div class="col-sm-3">
+                <select class="form-control" ng-model="contato.versao" ng-options="versao.numero for versao in versao">
+                    <option value="">Selecione uma versão</option>
+                </select>
+            </div>
+                <label for="" class="col-md-1 control-label">Estado:</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="filto" ng-model="contato.situacao" ng-options="situacao.nome for situacao in situacao | orderBy:'nome'">
+                    <option value="">Selecione uma situação</option>
+                </select>
+            </div>
+            </div>
+        </form>
+        <br>
+        <hr>
+        <div class="col-md-6">
+        <table class="table table-bordered table-hover table-striped">
+            <tr ng-show="contatos.length > 0" class="info">
+                <th>Razão</th>
+                <th>Fantasia</th>
+                <th>Versão Atual</th>
+                <th>Data</th>
+                <th>Situação</th>
+            </tr>
+            <tr ng-repeat="contato in contatos | filter:contato.versao.numero || contato.situacao.nome || {razao:busca}" ng-class="{'success': contato.situacao.nome == 'Sucesso', 'danger': contato.situacao.nome == 'Falha'}">
+                <td>{{contato.razao}}</td>
+                <td>{{contato.fantasia}}</td>
+                <td>{{contato.versao.numero}}</td>
+                <td>{{contato.data | date:'dd/MM/yyyy'}}</td>
+                <td>{{contato.situacao.nome}}</td>
+            </tr>
+        </table>
+        </div>
+    </div>
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</body>
+</html>

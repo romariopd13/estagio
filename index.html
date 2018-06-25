@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="graficos">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Configurador</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="estilo.css">
+    <script src="lib/angular-1.7.0/angular.js"></script>
+    <script src="googleChartDirective.js"></script>
+    <script src="lib/angular-google-chart-development/ng-google-chart.js"></script>
+    <script src="lib/angular-google-chart-development/ng-google-chart.min.js"></script>
+
+    <script src="angularjs.js"></script>
+</head>
+<body ng-controller="graficosCtrl">
+<div ng-include="'menu.html'"></div>
+
+    <div class="container">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="filto" class="col-sm-3 control-label">Filtro:</label>
+            <div class="col-sm-6">
+                <select class="form-control" id="filto" ng-model="meses.nome" ng-options="mes.nome for mes in meses " placeholder="Email">
+                    <option value="">Selecione um mês</option>
+                </select>
+            </div>
+                <button type="submit" class="btn btn-default">Pesquisar</button>
+            </div>
+        </form>
+    </div>
+    <div google-chart chart="myChartObject" style="height:500px;" agc-on-select="seriesSelected(selectedItem)"></div>
+    <div>
+        <p><a href="listagemTodos.html"> VER</a>
+            {{myChartObject.data.rows}}
+        </p>
+    </div>
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="lib/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+        
+    
